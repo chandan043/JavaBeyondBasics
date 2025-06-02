@@ -1,0 +1,21 @@
+# Ignore compiled class files
+*.class
+
+# Ignore lib folder jars
+lib/
+
+# Ignore logs
+*.log
+log/
+
+# Ignore Eclipse project files
+.classpath
+.project
+.settings/
+
+# Ignore bin folders if you want to avoid compiled classes there
+bin/
+
+# Ignore any OS-specific files (optional)
+.DS_Store
+Thumbs.db
