@@ -3,6 +3,8 @@
 
 # Ignore lib folder jars
 lib/
+JavaBeyondBasics/
+
 
 # Ignore logs
 *.log
