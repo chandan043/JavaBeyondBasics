@@ -40,7 +40,7 @@ public List<SIMDetails> fetchSIMDetailsWithActiveStatus() {
 	
 	@Override
 	public List<SIMDetails> fetchSIMDetails(){
-		List<SIMDetails> SimDetails = new ArrayList<>();
+		List<SIMDetails> simDetails = new ArrayList<>();
 	    
 	    try (Connection conn = HitachiUtil.getConnection();
 	         PreparedStatement ps = conn.prepareStatement("SELECT * FROM sim_details");
@@ -54,13 +54,13 @@ public List<SIMDetails> fetchSIMDetailsWithActiveStatus() {
 	                rs.getString("status"),
 	                rs.getLong("customer_id")
 	            );
-	            SimDetails.add(sim);
+	            simDetails.add(sim);
 	        }
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-	    return SimDetails;
+	    return simDetails;
 	}
 	
 

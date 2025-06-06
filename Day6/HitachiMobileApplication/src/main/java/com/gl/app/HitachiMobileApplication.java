@@ -9,12 +9,12 @@ import com.gl.app.exception.SIMDoesNotExistsException;
 import com.gl.app.service.*;
 import com.gl.app.service.impl.*;
 
-public class HitachiMobileApplication {
 
+public class HitachiMobileApplication {
 	
 public static void main(String[] args) throws SQLException {
-	CustomerService customerService = new CustomerServiceImpl();
-    SIMDetailsService simDetailsService = new SIMDetailsServiceImpl();
+	final CustomerService customerService = new CustomerServiceImpl();
+    final SIMDetailsService simDetailsService = new SIMDetailsServiceImpl();
 	
 	 Scanner scanner = new Scanner(System.in);
     while (true) {
@@ -55,9 +55,9 @@ public static void main(String[] args) throws SQLException {
                 break;
             case 5:
             	System.out.print("Enter SIM Number:");
-            	long simNumber = scanner.nextLong();
+            	final long simNumber = scanner.nextLong();
             	System.out.print("\nEnter ServiceNumber:");
-            	long serviceNumber= scanner.nextLong();
+            	final long serviceNumber= scanner.nextLong();
             	try {
             		System.out.println("SIM Status: "+ simDetailsService.getSimStatus(simNumber,serviceNumber));
             	}
@@ -69,11 +69,7 @@ public static void main(String[] args) throws SQLException {
            
             case 6:
                 System.out.println("Exiting...");
-			try {
-				scanner.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+                scanner.close();
                 System.exit(0);
             default:
                 System.out.println("Invalid choice. Please enter a number between 1 and 6.");

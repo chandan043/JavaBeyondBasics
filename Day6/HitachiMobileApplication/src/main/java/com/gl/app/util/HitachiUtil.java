@@ -1,31 +1,36 @@
 package com.gl.app.util;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
-
-
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Properties;
 
-public class HitachiUtil {
-	
-	private static final String URL = "jdbc:postgresql://localhost:5432/HitachiTelicomData";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "root";
-    static AtomicInteger counter = new AtomicInteger();
+public class HitachiUtil {    
+    
+    private static final String CONFIG_FILE = "configuration.properties";
 
-    public static Connection getConnection() {
-        try {
-            Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            return null;
+    public static Connection getConnection() throws SQLException {
+        Properties props = new Properties();
+        try (InputStream input = HitachiUtil.class.getClassLoader().getResourceAsStream(CONFIG_FILE)) {
+            if (input == null) {
+                throw new IOException("Configuration file not found: " + CONFIG_FILE);
+            }
+
+            props.load(input);
+
+            String url = props.getProperty("db.url");
+            String user = props.getProperty("db.user");
+            String password = props.getProperty("db.password");
+
+            return DriverManager.getConnection(url, user, password);
+        } catch (IOException e) {
+            throw new SQLException("Failed to load DB configuration.", e);
         }
-    }
-
+     }
     
     public int generateUniqueId(String columnName, String tableName, int initialValue) {
        int newId =initialValue;

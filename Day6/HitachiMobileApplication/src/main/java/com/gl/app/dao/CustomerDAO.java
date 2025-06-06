@@ -9,8 +9,9 @@ import com.gl.app.entity.SIMDetails;
 import com.gl.app.exception.CustomerDoesNotExistException;
 import com.gl.app.exception.CustomerTableEmptyException;
 
+// CustomerDAO interface
 public interface CustomerDAO {
-	  public List<SIMDetails> fetchSIMDetails(Long customerId) throws SQLException;
-	  public String updateCustomerAddress(Long customerId, String newAddress) throws CustomerDoesNotExistException ;
-	  public List<Customer> getAllCustomers() throws CustomerTableEmptyException;
+	  List<SIMDetails> fetchSIMDetails(Long customerId) throws SQLException;
+	  String updateCustomerAddress(Long customerId, String newAddress) throws CustomerDoesNotExistException ;
+	  List<Customer> getAllCustomers() throws CustomerTableEmptyException;
 }
